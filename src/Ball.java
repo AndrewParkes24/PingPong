@@ -2,26 +2,20 @@ import java.awt.*;
 
 public class Ball {
 
-    //VARIABLE DECLARATION SECTION
-    //Here's where you state which variables you are going to use.
 
-    public int xpos;                //the x position
-    public int ypos;                //the y position
+    public int xpos;
+    public int ypos;
     public int width;
     public int height;
-    public boolean isAlive;            //a boolean to denote if the hero is alive or dead.
-    public int dx;                    //the speed of the hero in the x direction
-    public int dy;                    //the speed of the hero in the y direction
+    public boolean isAlive;
+    public int dx;
+    public int dy;
     public Rectangle rec;
     public Image pic;
     public int hits;
     public boolean ballintersect = false;
 
 
-    // METHOD DEFINITION SECTION
-
-    //This is a constructor that takes 3 parameters.  This allows us to specify the object's name and position when we build it.
-    // if you put in a String, an int and an int the program will use this constructor instead of the one above.
     public Ball(int xpos, int ypos, int pXpos, int pYpos, Image ballpic) {
 
         this.xpos = pXpos;
@@ -36,7 +30,7 @@ public class Ball {
         rec = new Rectangle(xpos, ypos, width, height);
 
 
-    } // constructor
+    }
 
     public void pause ( int time){
         //sleep
@@ -48,7 +42,7 @@ public class Ball {
     }
 
 
-    //The move method.  Everytime this is run (or "called") the hero's x position and y position change by dx and dy
+
     public void move() {
         xpos = xpos + dx;
         ypos = ypos + dy;
@@ -75,7 +69,7 @@ public class Ball {
 
 
 
-} //end of the Cheese object class  definition
+}
 
 
 

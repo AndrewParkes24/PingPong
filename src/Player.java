@@ -31,9 +31,9 @@ public class Player {
         isAlive = true;
         rec = new Rectangle(xpos, ypos, width, height);
 
-    } // constructor
+    }
 
-    //move( ) method for a keyboard controlled character
+
     public void move() {
 
         if(down==true){

@@ -1,37 +1,22 @@
 
-//K. Chun 8/2018
+//K. Chun 8/2018, Andrew Parkes 2021
 
-//*******************************************************************************
-//Import Section
-//Add Java libraries needed for the game
-//import java.awt.Canvas;
-
-//Graphics Libraries
 
 import java.awt.Graphics2D;
 import java.awt.image.BufferStrategy;
 import java.awt.*;
 import javax.swing.*;
 
-//Keyboard and Mouse
-//Step 0 - Import
+
 import java.awt.event.*;
 
-//*******************************************************************************
-// Class Definition Section
 
-//Step 1 for Keyboard control - implements Keylistener
 public class PingPongWorld implements Runnable, KeyListener {
 
-    //Variable Definition Section
-    //Declare the variables used in the program
-    //You can set their initial valu'es too
 
-    //Sets the width and height of the program window
     final int WIDTH = 1000;
     final int HEIGHT = 700;
 
-    //Declare the variables needed for the graphics
     public JFrame frame;
     public Canvas canvas;
     public JPanel panel;
@@ -51,29 +36,22 @@ public class PingPongWorld implements Runnable, KeyListener {
 
     public boolean endScreen = false;
 
-    // Main method definition
-    // This is the code that runs first and automatically
     public static void main(String[] args) {
-        PingPongWorld myApp = new PingPongWorld();   //creates a new instance of the game
-        new Thread(myApp).start();                 //creates a threads & starts up the code in the run( ) method
+        PingPongWorld myApp = new PingPongWorld();
+        new Thread(myApp).start();
     }
 
 
-    // Constructor Method
-    // This has the same name as the class
-    // This section is the setup portion of the program
-    // Initialize your variables and construct your program objects here.
     public PingPongWorld() {
 
         setUpGraphics();
 
-        //Step 3 - Keyboard use.  addKeyListener(this)
+
         canvas.addKeyListener(this);
 
-        //variable and objects
-        //load images
-        ballpic = Toolkit.getDefaultToolkit().getImage("ball.pic"); //load the picture
-        paddlepic = Toolkit.getDefaultToolkit().getImage("paddle.pic"); //load the picture
+
+        ballpic = Toolkit.getDefaultToolkit().getImage("ball.pic");
+        paddlepic = Toolkit.getDefaultToolkit().getImage("paddle.pic");
         endScreenpic = Toolkit.getDefaultToolkit().getImage("end.pic");
         backgroundpic = Toolkit.getDefaultToolkit().getImage("background.pic");
 
@@ -84,7 +62,7 @@ public class PingPongWorld implements Runnable, KeyListener {
         user1 = new Player(950, 300, 5, 5, paddlepic);
         user2 = new Player(0, 300, 5, 5, paddlepic);
 
-        //construct array
+
  /*       cheeseArray = new Cheese[5];
 
         for (int i = 0; i < cheeseArray.length; i++) {
@@ -94,19 +72,10 @@ public class PingPongWorld implements Runnable, KeyListener {
     }
 
 
-    // CheeseWorld()
 
-
-//*******************************************************************************
-//User Method Section
-//
-// put your code to do things here.
-
-    // main thread
-    // this is the code that plays the game after you set things up
 
     public void moveThings() {
-        //calls the move( ) code in the objects
+
         ultimateball.move();
         user1.move();
         user2.move();
@@ -144,7 +113,7 @@ public class PingPongWorld implements Runnable, KeyListener {
     }
 
 
-    //paints things on the screen using bufferStrategy
+
     public void render () {
         Graphics2D g = (Graphics2D) bufferStrategy.getDrawGraphics();
         g.clearRect(0, 0, WIDTH, HEIGHT);
@@ -155,7 +124,7 @@ public class PingPongWorld implements Runnable, KeyListener {
         else {
 
 
-            //put your code to draw things on the screen here.
+
             g.drawImage(backgroundpic, 0, 0, 1000, 700, null);
             g.drawImage(ballpic, ultimateball.xpos, ultimateball.ypos, ultimateball.width, ultimateball.height, null);
             g.drawImage(user1.pic, user1.xpos, user1.ypos, user1.width, user1.height, null);
@@ -174,16 +143,16 @@ public class PingPongWorld implements Runnable, KeyListener {
 
     public void run () {
 
-        //for the moment we will loop things forever.
+
         while (true) {
             checkIntersections();
-            moveThings();  //move all the game objects
-            render();  // paint the graphics
-            pause(20); // sleep for 10 ms
+            moveThings();
+            render();
+            pause(20);
         }
     }
 
-    //Graphics setup method
+
     public void setUpGraphics () {
         frame = new JFrame("PingPongWorld");   //Create the program window or frame.  Names it.
 
@@ -213,9 +182,9 @@ public class PingPongWorld implements Runnable, KeyListener {
 
     }
 
-    //Pauses or sleeps the computer for the amount specified in milliseconds
+
     public void pause ( int time){
-        //sleep
+
         try {
             Thread.sleep(time);
         } catch (InterruptedException e) {
@@ -223,18 +192,12 @@ public class PingPongWorld implements Runnable, KeyListener {
         }
     }
 
-    //*******************************************************************************
-    //  The Required 3 Keyboard Methods
-    //  You need to have all 3 even if you aren't going to use them all
-    //*******************************************************************************
 
     public void keyPressed (KeyEvent event){
-        //This method will do something whenever any key is pressed down.
-        //Put if( ) statements here
-        char key = event.getKeyChar();     //gets the character of the key pressed
-        int keyCode = event.getKeyCode();  //gets the keyCode (an integer) of the key pressed
+
+        char key = event.getKeyChar();
+        int keyCode = event.getKeyCode();
         System.out.println("Key Pressed: " + key + "  Code: " + keyCode);
-//Add the arrows to if you can later
 
         if (keyCode == 83) {
             user2.down = true;
@@ -249,12 +212,12 @@ public class PingPongWorld implements Runnable, KeyListener {
             user1.up = true;
         }
 
-    }//keyPressed()
+    }
 
     public void keyReleased (KeyEvent event){
         char key = event.getKeyChar();
         int keyCode = event.getKeyCode();
-        //Add the arrows to if you can later
+
 
         if (keyCode == 83) {
             user2.down = false;
@@ -270,12 +233,11 @@ public class PingPongWorld implements Runnable, KeyListener {
         }
 
 
-    }//keyReleased()
+    }
 
     public void keyTyped (KeyEvent event){
-        // handles a press of a character key  (any key that can be printed but not keys like SHIFT)
-        // we won't be using this method but the definition needs to be in your program
-    }//keyTyped()
+
+    }
 
 
 }
